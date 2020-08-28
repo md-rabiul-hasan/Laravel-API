@@ -2,6 +2,9 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\User;
+use Illuminate\Support\Facades\Hash;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -23,3 +26,16 @@ Route::get('/articles/{id}', 'ArticleController@getArticle');
 Route::post('/article', 'ArticleController@saveArticle');
 Route::put('/articles/{id}', 'ArticleController@updateArticle');
 Route::delete('/articles/{id}', 'ArticleController@deleteArticle');
+
+Route::get('/create',function(){
+    User::forceCreate([
+        "name" => "Rabiul Hasan",
+        "email" => "xhasan.me@gmail.com",
+        "password" => Hash::make("xhasan.me")
+    ]);
+    User::forceCreate([
+        "name" => "Nizam Uddin",
+        "email" => "nizam@gmail.com",
+        "password" => Hash::make("nizamuddin")
+    ]);
+});
