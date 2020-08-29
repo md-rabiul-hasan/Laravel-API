@@ -11,4 +11,9 @@ class ArticleController extends Controller
         $allArticles = Article::all();
         return $allArticles;
     }
+
+    public function getArticle($id){
+        $article = Article::findOrFail($id);
+        echo $article;
+    }
 }
