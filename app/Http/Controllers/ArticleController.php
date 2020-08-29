@@ -28,4 +28,39 @@ class ArticleController extends Controller {
         $article->save();
         return $article;
     }
+
+    public function updateArticle(Request $request, $article_id) {
+        $article = Article::findOrFail($article_id);
+        $user    = $request->user();
+        if ($article->user_id != $user->id) {
+            return response()->json([
+                "error" => "You doesn't author this post",
+            ]);
+        } else {
+            $article->title   = $request->title;
+            $article->content = $request->content;
+            $article->save();
+            return response()->json([
+                "status"  => 200,
+                "success" => "Article modification successfully",
+            ]);
+        }
+    }
+
+    public function deleteArticle(Request $request, $article_id) {
+        $article = Article::findOrFail($article_id);
+        $user    = $request->user();
+        if ($article->user_id != $user->id) {
+            return response()->json([
+                "error" => "You doesn't author this post",
+            ]);
+        } else {
+            $article->delete();
+            return response()->json([
+                "status"  => 200,
+                "success" => "Article delete successfully",
+            ]);
+        }
+    }
+
 }
