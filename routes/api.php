@@ -26,9 +26,12 @@ Route::get('/articles/{article}', 'ArticleController@getArticle');
 
 Route::middleware('auth:api')->group(function(){
     Route::post('/articles', 'ArticleController@saveArticle');
-    Route::put('/articles/{id}', 'ArticleController@updateArticle');
+    Route::put('/articles/{article}', 'ArticleController@updateArticle');
     Route::delete('/articles/{id}', 'ArticleController@deleteArticle');
 });
+
+Route::post('/get-token','UserController@getToken');
+
 
 
 Route::middleware('auth:api')->get('/user', function(Request $request) {
